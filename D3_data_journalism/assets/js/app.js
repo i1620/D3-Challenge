@@ -1,8 +1,8 @@
 // @TODO: YOUR CODE HERE!
 function makeResponsive() {
 
-    let svgWidth = 660;
-    let svgHeight = 460;
+    let svgWidth = 960;
+    let svgHeight = 500;
 
     let margin = {
             top: 20,
@@ -68,12 +68,12 @@ function makeResponsive() {
                 .attr("cx", d => xLinearScale(d.poverty))
                 .attr("cy", d => yLinearScale(d.healthcare))
                 .attr("r",10)
-                .attr("fill","blue")
+                .attr("fill","red")
                 .attr("opacity",".6")
                 .attr("stroke-width","1")
                 .attr("stroke","black");
             
-                // States names
+            // States names
             chartGroup.select("g")
                 .selectAll("circle")
                 .data(riskData)
@@ -82,14 +82,27 @@ function makeResponsive() {
                 .text(d => d.abbr)
                 .attr("x", d => xLinearScale(d.poverty))
                 .attr("y", d => yLinearScale(d.healthcare))
-                .attr("dy", -400)
+                .attr("dy", -395)
                 .attr("text-anchor", "middle")
                 .attr("font-size", "12px")
-                .attr("fill", "red");
+                .attr("fill", "blue");
 
             console.log(riskData);
 
+            // Y Label
+            chartGroup.append("text")
+                .attr("transform", "rotate(-90)")
+                .attr("y", 0-50)
+                .attr("x", 0-250)
+                .attr("dy", "1em")
+                .attr("class", "axisText")
+                .text("Lacks Healthcare (%)");
             
+            // X Label
+            chartGroup.append("text")
+                .attr("transform",`translate(${width / 2.5}, ${height + margin.top + 25})`)
+                .attr("class", "axisText")
+                .text("In Poverty(%)")
         });
 }
 
